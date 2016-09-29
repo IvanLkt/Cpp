@@ -47,9 +47,62 @@ void print_dot( List *list )
 }
 
 
+void findFirst (List *list, int check_x, int check_y){
+    Coordinate * temp = list->head;
+    int i = 1;
+    while (temp != NULL){
+        if ((temp->x == check_x) && (temp->y == check_y)) {
+            std::cout << "It's on the " << i << " place from the begin" << std::endl;
+            break;
+        }
+        temp = temp->next;
+        i++;
+    }
+}
+
+
+void findLast (List *list, int check_x, int check_y) {
+    Coordinate * temp = list->tail;
+    int i = 1;
+    while (temp != NULL){
+        if ((temp->x == check_x) && (temp->y == check_y)) {
+            std::cout << "It's on the " << i << " place from the end" << std::endl;
+            break;
+        }
+        temp = temp->prev;
+        i++;
+    }
+}
+
+
+void addIn (List *list, int index, int X, int Y){
+    Coordinate * temp = list->head;
+    for(int i = 1; i < index; i++){
+        temp = temp->next;
+    }
+    Coordinate * newElem = new Coordinate;
+    newElem->x = X;
+    newElem->y = Y;
+    temp->prev->next = newElem;
+    newElem->prev = temp->prev;
+    temp->prev = newElem;
+    newElem->next = temp;
+}
+
+
+void popIn(List *list, int index){
+    Coordinate * temp = list->head;
+    for(int i = 2; i < index; i++){
+        temp = temp->next;
+    }
+    Coordinate * new_tmp = temp->next->next;
+    temp->next = new_tmp;
+    new_tmp->prev = temp;
+}
+
+
 int main()
 {
-        //std::cout << "Введите 20 пар координат"<<"\n";
         List *List1 = new List;
         for (int i = 0; i < 20; i++)
         {
@@ -61,7 +114,6 @@ int main()
             //std::cin >> x >> y;
             add_dot(List1, x, y);
         }
-        //std::cout<<"List is full";
         print_dot(List1);
         return 0;
 
