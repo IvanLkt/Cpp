@@ -6,17 +6,17 @@ const int N_MAX = 10000;
 
 using namespace std;
 
-struct Node       //Структура являющаяся звеном списка
+struct element_of_List       //Структура являющаяся звеном списка
 {
-    int x;//Значение x будет передаваться в список
-    Node *next, *prev; //Указатели на адреса следующего и предыдущего элементов списка
+    int x;      
+    element_of_List *next, *prev;    //Указатели на адреса следующего и предыдущего элементов списка
 };
 
 
 struct List   //Создаем тип данных Список
 {
-    Node *head;
-    Node *tail;  //Указатели на адреса начала списка и его конца
+    element_of_List *head;
+    element_of_List *tail;  //Указатели на адреса начала списка и его конца
 };
 
 int myHash(int x){   // ключ
@@ -29,7 +29,7 @@ struct hashTable{          // создание хеш-таблицы
 
 void add( hashTable *table, int x)
 {
-    Node *temp = new Node(); // Выделение памяти под новый элемент структуры
+    element_of_List *temp = new element_of_List(); // Выделение памяти под новый элемент структуры
     temp->next = NULL;       // Указываем, что изначально по следующему адресу пусто
     temp->x = x;
     int key = myHash(x);
@@ -50,7 +50,7 @@ void add( hashTable *table, int x)
 int find(hashTable *table, int checking_x){
 
     int key = myHash(checking_x);
-    Node * temp = (table->values[key]).head;
+    element_of_List * temp = (table->values[key]).head;
     int i = -1;
     if (temp != NULL)
         i = 0;
