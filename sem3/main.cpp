@@ -6,63 +6,115 @@ struct Coordinate
     int x;
     int y;
     Coordinate *next;
-    Coordinate *prev; //указатели на след. предыд. элементы списка
+    Coordinate *prev; //СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЃР»РµРґ. РїСЂРµРґС‹Рґ. СЌР»РµРјРµРЅС‚С‹ СЃРїРёСЃРєР°
 };
 
 struct List
 {
     Coordinate *head;
-    Coordinate *tail; // указатели на начало и конец списка
+    Coordinate *tail; // СѓРєР°Р·Р°С‚РµР»Рё РЅР° РЅР°С‡Р°Р»Рѕ Рё РєРѕРЅРµС† СЃРїРёСЃРєР°
 };
 
 void add_dot( List *list, int x, int y)
 {
-        Coordinate *temp = new Coordinate(); // Выделение памяти под новый элемент структуры
-        temp->next = NULL;       // Указываем, что изначально по следующему адресу пусто
-        temp->x = x;             // Записываем значение в структуру
-        temp->y = y;
+    Coordinate *temp = new Coordinate(); // Р’С‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё РїРѕРґ РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ СЃС‚СЂСѓРєС‚СѓСЂС‹
+    temp->next = NULL;       // РЈРєР°Р·С‹РІР°РµРј, С‡С‚Рѕ РёР·РЅР°С‡Р°Р»СЊРЅРѕ РїРѕ СЃР»РµРґСѓСЋС‰РµРјСѓ Р°РґСЂРµСЃСѓ РїСѓСЃС‚Рѕ
+    temp->x = x;             // Р—Р°РїРёСЃС‹РІР°РµРј Р·РЅР°С‡РµРЅРёРµ РІ СЃС‚СЂСѓРєС‚СѓСЂСѓ
+    temp->y = y;
 
-        if ( list->head != NULL ) // Если список не пуст
-        {
-                temp->prev = list->tail; // Указываем адрес на предыдущий элемент в соотв. поле
-                list->tail->next = temp; // Указываем адрес следующего за хвостом элемента
-                list->tail = temp;       //Меняем адрес хвоста
-        }
-        else //Если список пустой
-        {
-                temp->prev = NULL; // Предыдущий элемент указывает в пустоту
-                list->head = list->tail = temp;    // Голова=Хвост=тот элемент, что сейчас добавили
-        }
+    if ( list->head != NULL ) // Р•СЃР»Рё СЃРїРёСЃРѕРє РЅРµ РїСѓСЃС‚
+    {
+        temp->prev = list->tail; // РЈРєР°Р·С‹РІР°РµРј Р°РґСЂРµСЃ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ СЌР»РµРјРµРЅС‚ РІ СЃРѕРѕС‚РІ. РїРѕР»Рµ
+        list->tail->next = temp; // РЈРєР°Р·С‹РІР°РµРј Р°РґСЂРµСЃ СЃР»РµРґСѓСЋС‰РµРіРѕ Р·Р° С…РІРѕСЃС‚РѕРј СЌР»РµРјРµРЅС‚Р°
+        list->tail = temp;       //РњРµРЅСЏРµРј Р°РґСЂРµСЃ С…РІРѕСЃС‚Р°
+    }
+    else //Р•СЃР»Рё СЃРїРёСЃРѕРє РїСѓСЃС‚РѕР№
+    {
+        temp->prev = NULL; // РџСЂРµРґС‹РґСѓС‰РёР№ СЌР»РµРјРµРЅС‚ СѓРєР°Р·С‹РІР°РµС‚ РІ РїСѓСЃС‚РѕС‚Сѓ
+        list->head = list->tail = temp;    // Р“РѕР»РѕРІР°=РҐРІРѕСЃС‚=С‚РѕС‚ СЌР»РµРјРµРЅС‚, С‡С‚Рѕ СЃРµР№С‡Р°СЃ РґРѕР±Р°РІРёР»Рё
+    }
 }
 
 void print_dot( List *list )
 {
-        Coordinate * temp = list->head;  // Временно указываем на адрес первого элемента
-        while( temp != NULL )      // Пока не встретим пустое значение
-        {
-                std::cout <<"x:" <<temp->x << "y:" << temp->y << " "; //Выводим значение на экран
-                temp = temp->next;     //Смена адреса на адрес следующего элемента
+    Coordinate * temp = list->head;  // Р’СЂРµРјРµРЅРЅРѕ СѓРєР°Р·С‹РІР°РµРј РЅР° Р°РґСЂРµСЃ РїРµСЂРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
+    while( temp != NULL )      // РџРѕРєР° РЅРµ РІСЃС‚СЂРµС‚РёРј РїСѓСЃС‚РѕРµ Р·РЅР°С‡РµРЅРёРµ
+    {
+        std::cout <<"x:" <<temp->x << " " << "y:" << temp->y << " " << std::endl; //Р’С‹РІРѕРґРёРј Р·РЅР°С‡РµРЅРёРµ РЅР° СЌРєСЂР°РЅ
+        temp = temp->next;     //РЎРјРµРЅР° Р°РґСЂРµСЃР° РЅР° Р°РґСЂРµСЃ СЃР»РµРґСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р°
+    }
+    std::cout<<std::endl;
+}
+
+
+void findFirst (List *list, int check_x, int check_y){
+    Coordinate * temp = list->head;
+    int i = 1;
+    while (temp != NULL){
+        if ((temp->x == check_x) && (temp->y == check_y)) {
+            std::cout << " place from the begin" << i << std::endl;
+            break;
         }
-        std::cout<<"\n";
+        temp = temp->next;
+        i++;
+    }
+}
+
+
+void findLast (List *list, int check_x, int check_y) {
+    Coordinate * temp = list->tail;
+    int i = 1;
+    while (temp != NULL){
+        if ((temp->x == check_x) && (temp->y == check_y)) {
+            std::cout << " place from the end" << i << std::endl;
+            break;
+        }
+        temp = temp->prev;
+        i++;
+    }
+}
+
+
+void addIn (List *list, int index, int X, int Y){
+    Coordinate * temp = list->head;
+    for(int i = 1; i < index; i++){
+        temp = temp->next;
+    }
+    Coordinate * newElem = new Coordinate;
+    newElem->x = X;
+    newElem->y = Y;
+    temp->prev->next = newElem;
+    newElem->prev = temp->prev;
+    temp->prev = newElem;
+    newElem->next = temp;
+}
+
+
+void popIn(List *list, int index){
+    Coordinate * temp = list->head;
+    for(int i = 2; i < index; i++){
+        temp = temp->next;
+    }
+    Coordinate * new_tmp = temp->next->next;
+    temp->next = new_tmp;
+    new_tmp->prev = temp;
 }
 
 
 int main()
 {
-        //std::cout << "Введите 20 пар координат"<<"\n";
-        List *List1 = new List;
-        for (int i = 0; i < 20; i++)
-        {
-            int x = 2;
-            int y = 2;
-            //x = std::rand();
-            //y = std::rand();
+    List *List1 = new List;
+    for (int i = 0; i < 20; i++)
+    {
+        int x;
+        int y;
+        x = std::rand();
+        y = std::rand();
 
-            //std::cin >> x >> y;
-            add_dot(List1, x, y);
-        }
-        std::cout<<"List is full";
-        //print_dot(List1);
-        return 0;
+        //std::cin >> x >> y;
+        add_dot(List1, x, y);
+    }
+    print_dot(List1);
+    return 0;
 
 }
