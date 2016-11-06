@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 
-const int N_MAX = 10000;
+const int N_MAX = 1000;
 
 using namespace std;
 

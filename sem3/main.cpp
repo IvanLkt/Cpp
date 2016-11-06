@@ -75,7 +75,7 @@ void findLast (List *list, int check_x, int check_y) {
 }
 
 
-void addIn (List *list, int index, int X, int Y){
+void addIndex (List *list, int index, int X, int Y){
     Coordinate * temp = list->head;
     for(int i = 1; i < index; i++){
         temp = temp->next;
@@ -90,7 +90,7 @@ void addIn (List *list, int index, int X, int Y){
 }
 
 
-void popIn(List *list, int index){
+void popIndex(List *list, int index){
     Coordinate * temp = list->head;
     for(int i = 2; i < index; i++){
         temp = temp->next;
